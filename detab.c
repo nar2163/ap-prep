@@ -3,16 +3,16 @@
 
 void detab(char removeTabs[]);
 int getLine(char line[], int max);
+void printFunction(char line[], char c);
 
 int main(){
 
 	char line[MAXLINE];
 	int len;
 
-	while(len = getLine(line, MAXLINE) == 0){
-		printf("tabbed = %s \n", line);
-		detab(line);
-		printf("detab = %s \n", line);	
+	while((len = getLine(line, MAXLINE)) == 0){
+		printFunction(line, 'T');
+		printFunction(line, 'D');	
 	}
 
 
@@ -50,7 +50,7 @@ int getLine(char s[], int max){
 		++i;
 	}
 	
-	if(s[i] == EOF){
+	if(c  == EOF){
 		return -1;
 	} else {
 
@@ -62,4 +62,14 @@ int getLine(char s[], int max){
 
 }
 
+
+void printFunction(char line[], char c){
+
+	if(c == 'T'){
+		printf("Tabbed = %s \n", line);
+	} else if(c == 'D'){
+		printf("Detabbed = %s \n", line);
+	}
+
+}
 
