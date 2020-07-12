@@ -3,20 +3,34 @@
 
 void detab(char removeTabs[]);
 int getLine(char line[], int max);
-void printFunction(char line[], char c);
+void copy(char to[], char from[]);
 
 int main(){
-
+	
 	char line[MAXLINE];
 	int len;
 
 	while((len = getLine(line, MAXLINE)) == 0){
-		printFunction(line, 'T');
-		printFunction(line, 'D');	
+		printf("Tabbed: %s", line);
+		detab(line);
+		printf("Detabbed: %s", line);	
 	}
 
 
 	return 0;
+
+}
+
+void copy(char to[], char from[]){
+
+	int i;
+	
+	i = 0;
+
+	while((to[i] = from[i]) != '\0'){
+		++i;
+	}
+
 
 }
 
@@ -26,12 +40,7 @@ void detab(char removeTabs[]){
 
 	for(int i = 0; removeTabs[i] != '\0'; i++){
 		if(removeTabs[i] == '\t'){
-			while(internal < 8){
-				removeTabs[i++] = ' ';
-			}
-			
-			internal = 0;
-			i--;
+             		removeTabs[i] = ' ';
 		}
 	}
 
@@ -41,8 +50,8 @@ int getLine(char s[], int max){
 
 	int c, i;
 
-	for(i = 0; i < max - 1 && (c = getchar()) != EOF && c != '\n'; i++){
-		s[i] = 0;
+	for(i = 0; i < max - 1 && (c = getchar()) != EOF && c != '\n'; ++i){
+		s[i] = c;
 	}
 
 	if(c == '\n'){
