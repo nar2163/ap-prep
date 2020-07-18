@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int getLine(char s[]);
 void squeeze(char to[], char from[]);
@@ -15,7 +16,7 @@ int main(){
 	}
 
 
-
+	return 0;
 
 }
 
@@ -42,15 +43,27 @@ int  getLine(char s[]){
 void squeeze(char to[], char from[]){
 	
 	int replace = 0;
-        int i, j;
-
-	for(i = 0; i < 25; ++i){
-		if(to[i] == from[0]){
-			replace = i + 5;
-			for(j = i; j < replace; j++){
-				to[j] = to[replace++];
-			}
-			i = j;
+        int i = 0, j = 0;
+	int start = 0;
+        bool isPresent = false;
+	
+	while(i < 25){
+		if(to[i] == from[j]){
+			j++;
+			start = i - 6;
 		}
-	} 
+	
+      		i++;
+		if(j == 5){
+			isPresent = true;
+		}
+	}
+	
+	replace = start + 6;
+	
+	if(isPresent){
+		for(int x = start; replace < 25; x++){
+			to[start++] = to[replace++];
+		}
+	}	
 }
