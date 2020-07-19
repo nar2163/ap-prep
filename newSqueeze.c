@@ -50,20 +50,26 @@ void squeeze(char to[], char from[]){
 	while(i < 25){
 		if(to[i] == from[j]){
 			j++;
-			start = i - 6;
+			start = i;
 		}
 	
       		i++;
-		if(j == 5){
+		if(j >= 5){
 			isPresent = true;
+			start -= 6;
+			break;
 		}
 	}
 	
 	replace = start + 6;
 	
 	if(isPresent){
-		for(int x = start; replace < 25; x++){
+		for(int x = start; x <= 25; ++x){
 			to[start++] = to[replace++];
+			if(replace > 25){
+				break;
+			}
+
 		}
 	}	
 }
