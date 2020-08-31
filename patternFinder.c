@@ -3,7 +3,7 @@
 #define MAXLINE 1000
 
 int mygetline(char line[], int max);
-int strindex(char source[], char searchfor[], bool foundOrNot);
+int strindex(char source[], char searchfor[]);
 
 char pattern[] = "ould";
 
@@ -16,10 +16,9 @@ int main()
 	bool foundOrNot = false;
 
 	while (mygetline(line, MAXLINE) > 0){
-		if ((foundIndex = strindex(line, pattern, foundOrNot)) >= 0) {
+		if ((foundIndex = strindex(line, pattern)) >= 0) {
 			printf("%s", line);
 			found++;
-			foundOrNot = true;
 			printf("Found: %d, at Index: %d", found, foundIndex);
 		}
 	}
@@ -48,22 +47,27 @@ int mygetline(char s[], int lim)
 
 /* strindex: return index of t in s, -1 if none */
 
-int strindex(char s[], char t[], bool foundOrNot)
+int strindex(char s[], char t[])
 {
 	int i, j, k;
-	int foundIndex;
 
-	for(i = 0; s[i] != '\0'; i++) {
-		for(j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++){
-			if(k == 0 && foundOrNot){
-				foundIndex = j;
-			}
-		}
-		if (k > 0 && t[k] == '\0'){
-			return foundIndex;
-		}
+	for(i = 0; s[i] != '\0'; i++){
+		;
 	}
 
+	for(k = 0; t[k] != '\0'; k++){
+		;
+	}
+
+	for( ; i >= 0; i--) {
+		for(j = i; s[j] == t[k]; j--, k--){
+			if(k == 0){
+				return j;
+			}
+		}		
+	}
+        
+       
 	return -1;
 }
 
